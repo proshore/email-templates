@@ -1,0 +1,25 @@
+{
+    "name": "proshore/email-templates",
+    "description": "Email Template Management",
+    "authors": [
+        {
+            "name": "Sudhir Bastakoti",
+            "email": "sudhirconscious@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Proshore\\EmailTemplates\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Proshore\\EmailTemplates\\EmailTemplatesServiceProvider"
+            ]
+        }
+    }
+}
