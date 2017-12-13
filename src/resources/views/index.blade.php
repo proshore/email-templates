@@ -35,7 +35,7 @@
                         <td>{{$emailTemplate->title}}</td>
                         <td>{{$emailTemplate->subject}}</td>
                         <td>
-                            <a class="btn btn-info" href="{{ route('emailtemplates.edit', ['id' => $emailTemplate->id]) }}">Edit</a> |
+                            <a class="btn btn-primary" href="{{ route('emailtemplates.edit', ['id' => $emailTemplate->id]) }}">Edit</a>
                             {{ Form::open(array('route' => array('emailtemplates.delete', $emailTemplate->id), 'class' => 'pull-right', 'style' => 'display:inline;')) }}
                             {{ Form::submit('Delete', array('class' => 'btn btn-danger', 'onclick' => 'return confirm("'._("Are you sure you want to delete this?").'")')) }}
                             {{ Form::close() }}

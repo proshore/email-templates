@@ -39,7 +39,7 @@ class EmailTemplatesServiceProvider extends ServiceProvider
         ], 'public');
 
         //pass layout name to view
-        view()->share('current_layout', config('proshore-email-templates.layout_name'));
+        view()->share('current_layout', config('proshore-email-templates.layout-extend-path'));
     }
 
     /**

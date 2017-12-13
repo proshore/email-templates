@@ -3,14 +3,30 @@
 //    return EmailTemplates::hello();
 //});
 
-Route::group(['middleware' => 'web', 'prefix' => 'emailtemplates'], function () {
+$routeGroupParams['namespace'] = 'Proshore\EmailTemplates\Http\Controllers';
 
-    Route::get('/', '\Proshore\EmailTemplates\Http\Controllers\EmailTemplatesController@index')->name('emailtemplates.index');
-    Route::get('/create', '\Proshore\EmailTemplates\Http\Controllers\EmailTemplatesController@create')->name('emailtemplates.create');
-    Route::post('/store', '\Proshore\EmailTemplates\Http\Controllers\EmailTemplatesController@store')->name('emailtemplates.store');
-    Route::get('/edit/{id}', '\Proshore\EmailTemplates\Http\Controllers\EmailTemplatesController@edit')->name('emailtemplates.edit');
-    Route::post('/update/{id}', '\Proshore\EmailTemplates\Http\Controllers\EmailTemplatesController@update')->name('emailtemplates.update');
-    Route::post('/delete/{id}', '\Proshore\EmailTemplates\Http\Controllers\EmailTemplatesController@destroy')->name('emailtemplates.delete');
-    Route::post('/uploadImage', '\Proshore\EmailTemplates\Http\Controllers\EmailTemplatesController@uploadImage');
+if(config('proshore-email-templates.prefix')) {
+    $routeGroupParams['prefix'] = config('proshore-email-templates.prefix');
+}
+
+if(config('proshore-email-templates.middleware')) {
+    $routeGroupParams['middleware'] = config('proshore-email-templates.middleware');
+}
+
+Route::group($routeGroupParams, function () {
+
+    Route::get('emailtemplates', 'EmailTemplatesController@index')
+        ->name('emailtemplates.index');
+    Route::get('emailtemplates/create', 'EmailTemplatesController@create')
+        ->name('emailtemplates.create');
+    Route::post('emailtemplates/store', 'EmailTemplatesController@store')
+        ->name('emailtemplates.store');
+    Route::get('emailtemplates/edit/{id}', 'EmailTemplatesController@edit')
+        ->name('emailtemplates.edit');
+    Route::post('emailtemplates/update/{id}', 'EmailTemplatesController@update')
+        ->name('emailtemplates.update');
+    Route::post('emailtemplates/delete/{id}', 'EmailTemplatesController@destroy')
+        ->name('emailtemplates.delete');
+    Route::post('emailtemplates/uploadImage', 'EmailTemplatesController@uploadImage');
 
 });

@@ -12,8 +12,18 @@ return [
         'USER_SIGNUP', 'USER_ACTIVATE', 'FORGOT_PASSWORD'
     ],
 
+    /*
+     * prefix for the route. leave empty if not required
+     */
+    'prefix' => 'admin',
+
+    /*
+     * Add additional middleware if required
+     */
+    'middleware' => ['web'],
+
     /**
      * Name of layout to be used, such as 'layouts.default'
      */
-    'layout_name' => 'layouts.default'
+    'layout-extend-path' => 'layouts.default'
 ];
