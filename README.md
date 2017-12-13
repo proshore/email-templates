@@ -44,8 +44,9 @@ php artisan vendor:publish --tag=migrations
 php artisan vendor:publish --tag=public
 ````
 
+
 ## Usage
-Multiple slugs can be added to config based on which the template identifiers are displayed in CRUD section, please change the config file located at 'config/proshore-email-templates.php'. Initially, there are some slugs to get you started with.
+TinyMCE script should be included in your appropriate layout. Multiple slugs can be added to config based on which the template identifiers are displayed in CRUD section, please change the config file located at 'config/proshore-email-templates.php'. Initially, there are some slugs to get you started with.
 
 
 
