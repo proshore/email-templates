@@ -33,7 +33,7 @@
         <div class="text-center">
             <h3>No templates available yet</h3>
             <p>
-                <a href="{{ route('emailtemplates.create') }}">
+                <a href="{{ route('email-templates.create') }}">
                     Create new template
                 </a>
             </p>
