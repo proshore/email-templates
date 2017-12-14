@@ -1,26 +1,26 @@
 <?php
+
 namespace Proshore\EmailTemplates\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class EmailTemplateRequest
- * @package Proshore\EmailTemplates
+ * Class EmailTemplateRequest.
  */
 class EmailTemplate extends Model
 {
     use SoftDeletes;
 
     /**
-     * Database table to be used by the model
+     * Database table to be used by the model.
      *
      * @var string
      */
     protected $table = 'email_templates';
 
     /**
-     * Fields for mass assignment
+     * Fields for mass assignment.
      *
      * @var array
      */
@@ -28,7 +28,6 @@ class EmailTemplate extends Model
         'slug',
         'title',
         'subject',
-        'content'
+        'content',
     ];
-
 }

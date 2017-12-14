@@ -16,11 +16,12 @@ class EmailTemplateRequest extends FormRequest
         return true;
     }
 
-    public function postMergeRule($rules,$attribute,$rule)
+    public function postMergeRule($rules, $attribute, $rule)
     {
-        if($this->method == 'POST') {
-            return array_add($rules,$attribute,$rule);
+        if ($this->method == 'POST') {
+            return array_add($rules, $attribute, $rule);
         }
+
         return $rules;
     }
 
@@ -34,10 +35,10 @@ class EmailTemplateRequest extends FormRequest
         $rules = [
             'title'   => 'required',
             'subject' => 'required',
-            'content' => 'required'
+            'content' => 'required',
         ];
 
-        $this->postMergeRule($rules,'slug','required');
+        $this->postMergeRule($rules, 'slug', 'required');
 
         return $rules;
     }

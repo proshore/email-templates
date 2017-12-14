@@ -1,4 +1,5 @@
 <?php
+
 namespace Proshore\EmailTemplates;
 
 use Exception;
@@ -6,19 +7,17 @@ use File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class EmailTemplates
- * @package Proshore\EmailTemplates
+ * Class EmailTemplates.
  */
 class EmailTemplates
 {
-
     public function upload(UploadedFile $file)
     {
         $isValidImage = $this->isValidImage($file);
         if (!$isValidImage) {
             return [
-                "status"    =>  false,
-                "message"   =>  'Not a valid image'
+                'status'    => false,
+                'message'   => 'Not a valid image',
             ];
         }
 
@@ -28,29 +27,31 @@ class EmailTemplates
         $fileName = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
 
-        $newFileName = md5($fileName . strtotime('now')) . '.' . $extension;
+        $newFileName = md5($fileName.strtotime('now')).'.'.$extension;
 
         $isUploaded = $file->move($uploadPath, $newFileName);
 
         if (!$isUploaded) {
             return [
-                "status" => false,
-                "message"   =>  'Could not upload image'
+                'status'    => false,
+                'message'   => 'Could not upload image',
             ];
         }
 
         $originalUploadDir = $this->getRelativePath($uploadPath);
+
         return [
-            "status"    =>  true,
-            "message"   =>   '/' . $originalUploadDir . '/' . $newFileName
+            'status'    => true,
+            'message'   => '/'.$originalUploadDir.'/'.$newFileName,
         ];
     }
 
     /**
      * Check if image is valid
-     * Checks for existence of 'image' string in mime type
+     * Checks for existence of 'image' string in mime type.
      *
      * @param UploadedFile $file
+     *
      * @return bool
      */
     private function isValidImage(UploadedFile $file)
@@ -58,16 +59,19 @@ class EmailTemplates
         if (substr($file->getMimeType(), 0, 5) == 'image') {
             return true;
         }
+
         return false;
     }
 
     /**
      * Prepare the upload directory
-     * Creates file upload directory if not already exists
+     * Creates file upload directory if not already exists.
      *
      * @param null $absolutePath
-     * @return bool
+     *
      * @throws Exception
+     *
+     * @return bool
      */
     private function prepareUploadDirectory($absolutePath = null)
     {
@@ -77,22 +81,22 @@ class EmailTemplates
 
         try {
             @File::makeDirectory($absolutePath, 0777, true);
+
             return true;
-        }
-        catch (Exception $e) {
-            throw new Exception("Could not make directory.");
+        } catch (Exception $e) {
+            throw new Exception('Could not make directory.');
         }
     }
 
     /**
-     * Returns relative path of upload directory
+     * Returns relative path of upload directory.
      *
      * @param $absolutePath
+     *
      * @return string
      */
     private function getRelativePath($absolutePath)
     {
         return trim(str_replace(public_path(), '', $absolutePath), '/');
     }
-
 }

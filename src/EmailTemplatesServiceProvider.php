@@ -1,10 +1,11 @@
 <?php
+
 namespace Proshore\EmailTemplates;
 
 use Illuminate\Support\ServiceProvider;
+
 /**
- * Class EmailTemplatesServiceProvider
- * @package Proshore\EmailTemplates
+ * Class EmailTemplatesServiceProvider.
  */
 class EmailTemplatesServiceProvider extends ServiceProvider
 {
@@ -15,24 +16,23 @@ class EmailTemplatesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__ . '/routes/routes.php');
-        $this->loadViewsFrom(__DIR__ . '/views', 'proshore-email-templates');
+        $this->loadRoutesFrom(__DIR__.'/routes/routes.php');
+        $this->loadViewsFrom(__DIR__.'/views', 'proshore-email-templates');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
         //public config
         $this->publishes([
-            __DIR__ . '/config/settings.php' => config_path('proshore.email-templates.php'),
+            __DIR__.'/config/settings.php' => config_path('proshore.email-templates.php'),
         ], 'config');
 
         //publish views
         $this->publishes([
-            __DIR__ . '/resources/views' => resource_path('views/vendor/proshore-email-templates')
+            __DIR__.'/resources/views' => resource_path('views/vendor/proshore-email-templates'),
         ], 'views');
-
 
         //publish assets
         $this->publishes([
-            __DIR__ . '/assets' => public_path('vendor/proshore-email-templates')
+            __DIR__.'/assets' => public_path('vendor/proshore-email-templates'),
         ], 'public');
 
         //pass layout name to view
@@ -49,12 +49,11 @@ class EmailTemplatesServiceProvider extends ServiceProvider
         //register controllers
 
         $this->mergeConfigFrom(
-            __DIR__ . '/config/settings.php', 'proshore-email-templates'
+            __DIR__.'/config/settings.php', 'proshore-email-templates'
         );
 
-
         $this->app->bind('proshore-email-templates', function () {
-            return new EmailTemplates;
+            return new EmailTemplates();
         });
     }
 }

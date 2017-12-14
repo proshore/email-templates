@@ -1,15 +1,15 @@
 <?php
+
 namespace Proshore\EmailTemplates\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Validator;
-use Proshore\EmailTemplates\Models\EmailTemplate;
 use Proshore\EmailTemplates\Http\Requests\EmailTemplateRequest;
+use Proshore\EmailTemplates\Models\EmailTemplate;
+
 /**
- * Class EmailTemplatesController
- * @package App\Http\Controllers
+ * Class EmailTemplatesController.
  */
 class EmailTemplatesController extends BaseController
 {
@@ -21,7 +21,7 @@ class EmailTemplatesController extends BaseController
         $displayAdd = true;
 
         $emailTemplates = EmailTemplate::all();
-        foreach($emailTemplates as $emailTemplate) {
+        foreach ($emailTemplates as $emailTemplate) {
             if (in_array($emailTemplate->slug, $templateSlugs)) {
                 $remainingCount++;
             }
@@ -30,7 +30,6 @@ class EmailTemplatesController extends BaseController
         if ($remainingCount >= $slugsCount) {
             $displayAdd = false;
         }
-
 
         return view('proshore-email-templates::index', compact('emailTemplates', 'displayAdd'));
     }
@@ -42,8 +41,8 @@ class EmailTemplatesController extends BaseController
 
         $emailTemplates = EmailTemplate::all();
 
-        foreach($emailTemplates as $emailTemplate) {
-            if ( in_array($emailTemplate->slug, $templateSlugs, false) ) {
+        foreach ($emailTemplates as $emailTemplate) {
+            if (in_array($emailTemplate->slug, $templateSlugs, false)) {
                 unset($templateSlugs[$emailTemplate->slug]);
             }
         }
@@ -53,13 +52,11 @@ class EmailTemplatesController extends BaseController
 
     public function store(EmailTemplateRequest $request)
     {
-
-
         EmailTemplate::create([
-            'slug' => $request->get('slug'),
-            'title' => $request->get('title'),
+            'slug'    => $request->get('slug'),
+            'title'   => $request->get('title'),
             'subject' => $request->get('subject'),
-            'content' => $request->get('content')
+            'content' => $request->get('content'),
         ]);
 
         return redirect()->route('email-templates.index')->with('success', __('Email Template created successfully'));
@@ -75,13 +72,12 @@ class EmailTemplatesController extends BaseController
         if ($emailTemplate == null) {
             return redirect()
                 ->route('email-templates.index');
-        }
-        else {
+        } else {
             return view('proshore-email-templates::edit', compact('emailTemplate', 'templateSlugs'));
         }
     }
 
-    public function update(EmailTemplateRequest $request ,$id)
+    public function update(EmailTemplateRequest $request, $id)
     {
         $emailTemplate = EmailTemplate::findOrFail($id);
 
@@ -92,7 +88,6 @@ class EmailTemplatesController extends BaseController
         $emailTemplate->save();
 
         return redirect()->route('email-templates.index')->with('success', __('Email Template updated successfully'));
-
     }
 
     public function destroy($id)
@@ -109,9 +104,10 @@ class EmailTemplatesController extends BaseController
             $response = \EmailTemplates::upload(Request::file('file'));
             if ($response['status']) {
                 echo json_encode([
-                    'location'  =>  $response['message']
+                    'location'  => $response['message'],
                 ]);
             }
+
             return;
         }
     }
