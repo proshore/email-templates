@@ -47,6 +47,9 @@ class EmailTemplatesServiceProvider extends ServiceProvider
     public function register()
     {
         //register controllers
+        $this->app->make(
+            \Proshore\EmailTemplates\Http\Controllers\EmailTemplatesController::class
+        );
 
         $this->mergeConfigFrom(
             __DIR__.'/config/settings.php', 'proshore-email-templates'
