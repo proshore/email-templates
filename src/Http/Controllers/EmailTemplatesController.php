@@ -6,7 +6,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Proshore\EmailTemplates\Models\EmailTemplate;
-use Config;
+use Proshore\EmailTemplates\Http\Requests\EmailTemplateRequest;
 /**
  * Class EmailTemplatesController
  * @package App\Http\Controllers
@@ -16,7 +16,7 @@ class EmailTemplatesController extends BaseController
     public function index()
     {
         $remainingCount = 0;
-        $templateSlugs = Config::get('proshore-email-templates.template_slugs');
+        $templateSlugs = config('proshore.email-templates.template_slugs');
         $slugsCount = count($templateSlugs);
         $displayAdd = true;
 
@@ -37,13 +37,13 @@ class EmailTemplatesController extends BaseController
 
     public function create()
     {
-        $templateSlugs = Config::get('proshore-email-templates.template_slugs');
+        $templateSlugs = config('proshore.email-templates.template_slugs');
         $templateSlugs = array_combine($templateSlugs, $templateSlugs);
 
         $emailTemplates = EmailTemplate::all();
 
         foreach($emailTemplates as $emailTemplate) {
-            if ( in_array($emailTemplate->slug, $templateSlugs) ) {
+            if ( in_array($emailTemplate->slug, $templateSlugs, false) ) {
                 unset($templateSlugs[$emailTemplate->slug]);
             }
         }
@@ -51,14 +51,9 @@ class EmailTemplatesController extends BaseController
         return view('proshore-email-templates::create', compact('templateSlugs'));
     }
 
-    public function store(Request $request)
+    public function store(EmailTemplateRequest $request)
     {
-        $request->validate([
-            'slug' => 'required',
-            'title' =>  'required',
-            'subject' => 'required',
-            'content' => 'required'
-        ]);
+
 
         EmailTemplate::create([
             'slug' => $request->get('slug'),
@@ -67,72 +62,45 @@ class EmailTemplatesController extends BaseController
             'content' => $request->get('content')
         ]);
 
-        return redirect()
-            ->route('emailtemplates.index')
-            ->with('flash_notification.message', 'Template created successfully')
-            ->with('flash_notification.level', 'success');
+        return redirect()->route('email-templates.index')->with('success', __('Email Template created successfully'));
     }
 
     public function edit($id)
     {
-        $templateSlugs = Config::get('proshore-email-templates.template_slugs');
+        $templateSlugs = config('proshore.email-templates.template_slugs');
         $templateSlugs = array_combine($templateSlugs, $templateSlugs);
 
         $emailTemplate = EmailTemplate::find($id);
 
         if ($emailTemplate == null) {
             return redirect()
-                ->route('emailtemplates.index');
+                ->route('email-templates.index');
         }
         else {
             return view('proshore-email-templates::edit', compact('emailTemplate', 'templateSlugs'));
         }
     }
 
-    public function update($id)
+    public function update(EmailTemplateRequest $request ,$id)
     {
-        $rules = [
-            'title' =>  'required',
-            'subject' => 'required',
-            'content' => 'required'
-        ];
+        $emailTemplate = EmailTemplate::findOrFail($id);
 
-        $validator = Validator::make(Input::all(), $rules);
+        $emailTemplate->title = Input::get('title');
+        $emailTemplate->subject = Input::get('subject');
+        $emailTemplate->content = Input::get('content');
 
-        if ($validator->fails()) {
-            return redirect('emailtemplates/edit/' . $id)
-                ->withErrors($validator)
-                ->withInput(Input::all());
-        }
-        else {
-            $emailTemplate = EmailTemplate::find($id);
-            $emailTemplate->title = Input::get('title');
-            $emailTemplate->subject = Input::get('subject');
-            $emailTemplate->content = Input::get('content');
+        $emailTemplate->save();
 
-            $emailTemplate->save();
-            return redirect()
-                ->route('emailtemplates.index')
-                ->with('flash_notification.message', 'Template updated successfully')
-                ->with('flash_notification.level', 'success');
-        }
+        return redirect()->route('email-templates.index')->with('success', __('Email Template updated successfully'));
 
     }
 
     public function destroy($id)
     {
-        $emailTemplate = EmailTemplate::find($id);
-        if ($emailTemplate == null) {
-            return redirect()
-                ->route('emailtemplates.index');
-        }
-        else {
-            $emailTemplate->delete();
-            return redirect()
-                ->route('emailtemplates.index')
-                ->with('flash_notification.message', 'Template deleted successfully')
-                ->with('flash_notification.level', 'success');
-        }
+        $emailTemplate = EmailTemplate::findOrFail($id);
+        $emailTemplate->delete();
+
+        return redirect()->route('email-templates.index')->with('success', __('Email Template deleted successfully'));
     }
 
     public function uploadImage()

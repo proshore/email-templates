@@ -25,5 +25,10 @@ return [
     /**
      * Name of layout to be used, such as 'layouts.default'
      */
-    'layout-extend-path' => 'layouts.default'
+    'layout-extend-path' => 'layouts.default',
+
+    /*
+     * Blade field to put javscript stack. eg stack('scripts')
+     */
+    'script-stack' => 'scripts',
 ];

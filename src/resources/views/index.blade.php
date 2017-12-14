@@ -1,21 +1,5 @@
 @extends($current_layout)
 @section('content')
-    <h1>
-        Email Templates
-        @if($displayAdd)
-            <a href="{{ route('emailtemplates.create') }}" class="btn btn-primary pull-right btn-sm">
-                Add New Template
-            </a>
-        @endif
-    </h1>
-
-    @if(session()->has('flash_notification.message'))
-        <div class="alert alert-{{ session('flash_notification.level') }}">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-
-            {{ session('flash_notification.message') }}
-        </div>
-    @endif
 
     @if(count($emailTemplates))
         <div class="table-responsive">
@@ -35,8 +19,8 @@
                         <td>{{$emailTemplate->title}}</td>
                         <td>{{$emailTemplate->subject}}</td>
                         <td>
-                            <a class="btn btn-primary" href="{{ route('emailtemplates.edit', ['id' => $emailTemplate->id]) }}">Edit</a>
-                            {{ Form::open(array('route' => array('emailtemplates.delete', $emailTemplate->id), 'class' => 'pull-right', 'style' => 'display:inline;')) }}
+                            <a class="btn btn-primary" href="{{ route('email-templates.edit', ['id' => $emailTemplate->id]) }}">Edit</a>
+                            {{ Form::open(array('route' => array('email-templates.destroy', $emailTemplate->id), 'method' =>'DELETE', 'class' => 'pull-right', 'style' => 'display:inline;')) }}
                             {{ Form::submit('Delete', array('class' => 'btn btn-danger', 'onclick' => 'return confirm("'._("Are you sure you want to delete this?").'")')) }}
                             {{ Form::close() }}
                         </td>

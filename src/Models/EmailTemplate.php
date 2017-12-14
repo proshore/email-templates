@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class EmailTemplate
+ * Class EmailTemplateRequest
  * @package Proshore\EmailTemplates
  */
 class EmailTemplate extends Model

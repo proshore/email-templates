@@ -1,10 +1,7 @@
 @extends($current_layout)
 @section('content')
-    <h1>
-        Edit Template:: {{ $emailTemplate->title }}
-    </h1>
-    @include('partials.flash_notification')
-    {{ Form::open(array('route' => array('emailtemplates.update', $emailTemplate->id))) }}
+
+    {{ Form::open(array('route' => array('email-templates.update', $emailTemplate->id), 'method' => 'put')) }}
     <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
 
     <div class="form-group">
@@ -26,6 +23,6 @@
     <button type="submit" class="btn btn-primary">Save</button>
     {{ Form::close() }}
 @stop
-@section('scripts')
-    <script src="{{ asset('vendor/email-templates/js') }}/email-templates.js"></script>
-@stop
+@push(config('proshore.email-templates.script-stack'))
+    <script src="{{ asset('vendor/proshore-email-templates/js') }}/email-templates.js"></script>
+@endpush

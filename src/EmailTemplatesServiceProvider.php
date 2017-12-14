@@ -15,12 +15,13 @@ class EmailTemplatesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
+        $this->loadRoutesFrom(__DIR__ . '/routes/routes.php');
         $this->loadViewsFrom(__DIR__ . '/views', 'proshore-email-templates');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
         //public config
         $this->publishes([
-            __DIR__ . '/config/settings.php' => config_path('proshore-email-templates.php'),
+            __DIR__ . '/config/settings.php' => config_path('proshore.email-templates.php'),
         ], 'config');
 
         //publish views
@@ -28,10 +29,6 @@ class EmailTemplatesServiceProvider extends ServiceProvider
             __DIR__ . '/resources/views' => resource_path('views/vendor/proshore-email-templates')
         ], 'views');
 
-        //publish migration files
-        $this->publishes([
-            __DIR__ . '/migrations' => $this->app->databasePath() . '/migrations'
-        ], 'migrations');
 
         //publish assets
         $this->publishes([
@@ -39,7 +36,7 @@ class EmailTemplatesServiceProvider extends ServiceProvider
         ], 'public');
 
         //pass layout name to view
-        view()->share('current_layout', config('proshore-email-templates.layout-extend-path'));
+        view()->share('current_layout', config('proshore.email-templates.layout-extend-path'));
     }
 
     /**

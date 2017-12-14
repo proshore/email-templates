@@ -1,7 +1,6 @@
 <?php
 namespace Proshore\EmailTemplates;
 
-use Config;
 use Exception;
 use File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -23,7 +22,7 @@ class EmailTemplates
             ];
         }
 
-        $uploadPath = Config::get('proshore-email-templates.upload_directory');
+        $uploadPath = config('proshore.email-templates.upload_directory');
         $this->prepareUploadDirectory($uploadPath);
 
         $fileName = $file->getClientOriginalName();
