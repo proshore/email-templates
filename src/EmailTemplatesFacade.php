@@ -1,17 +1,16 @@
 <?php
+
 namespace Proshore\EmailTemplates;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Class EmailTemplatesFacade
- * @package Proshore\EmailTemplates
+ * Class EmailTemplatesFacade.
  */
 class EmailTemplatesFacade extends Facade
 {
-
     /**
-     * Get registered name of the component
+     * Get registered name of the component.
      *
      * @return string
      */
@@ -19,5 +18,4 @@ class EmailTemplatesFacade extends Facade
     {
         return 'proshore-email-templates';
     }
-
 }
