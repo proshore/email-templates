@@ -60,9 +60,13 @@ $(function() {
         plugins: [
             'autolink link image preview anchor textcolor',
             'image imagetools',
+            'template',
             'insertdatetime media table paste code'
         ],
-        toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image | imageupload',
+        templates: [
+            {title: 'Sample Template', description: 'Sample Template for Signup', url: 'templates/signup'}
+        ],
+        toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image | imageupload | template',
         content_css: [
             '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
             '//www.tinymce.com/css/codepen.min.css']

@@ -15,6 +15,15 @@ class EmailTemplatesController extends BaseController
 {
     public function index()
     {
+        $emailTemplates = EmailTemplate::all();
+
+        $displayAdd = $this->canAddTemplates();
+
+        return view('proshore-email-templates::index', compact('emailTemplates', 'displayAdd'));
+    }
+
+    private function canAddTemplates()
+    {
         $remainingCount = 0;
         $templateSlugs = config('proshore.email-templates.template_slugs');
         $slugsCount = count($templateSlugs);
@@ -22,7 +31,7 @@ class EmailTemplatesController extends BaseController
 
         $emailTemplates = EmailTemplate::all();
         foreach ($emailTemplates as $emailTemplate) {
-            if (in_array($emailTemplate->slug, $templateSlugs)) {
+            if (in_array($emailTemplate->slug, $templateSlugs, false)) {
                 $remainingCount++;
             }
         }
@@ -31,11 +40,15 @@ class EmailTemplatesController extends BaseController
             $displayAdd = false;
         }
 
-        return view('proshore-email-templates::index', compact('emailTemplates', 'displayAdd'));
+        return $displayAdd;
     }
 
     public function create()
     {
+        if (! $this->canAddTemplates()) {
+            return redirect()->route('email-templates.index')->with('error', __('No more templates can be created.'));
+        }
+
         $templateSlugs = config('proshore.email-templates.template_slugs');
         $templateSlugs = array_combine($templateSlugs, $templateSlugs);
 
@@ -110,5 +123,11 @@ class EmailTemplatesController extends BaseController
 
             return;
         }
+    }
+
+    public function templates($slug)
+    {
+        $templateName = 'template_'.$slug;
+        return view('proshore-email-templates::templates.'.$templateName, compact('emailTemplates', 'displayAdd'));
     }
 }
