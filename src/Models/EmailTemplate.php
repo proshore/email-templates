@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class EmailTemplate extends Model
 {
-    use SoftDeletes;
-
     /**
      * Database table to be used by the model.
      *

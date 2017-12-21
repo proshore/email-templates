@@ -27,7 +27,7 @@
                                 <input type="text" class="form-control" name="subject" id="subject" value="{{ $emailTemplate->subject }}" placeholder="Template Subject">
                             </div>
                             <div class="form-group">
-                                <label for="content">Content *</label>
+                                <label for="content">Content <small>(Max Image Size: 400X400)</small></label>
                                 <textarea class="form-control" name="content" id="content" rows="10">{{ $emailTemplate->content }}</textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Save</button>
