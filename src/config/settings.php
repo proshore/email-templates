@@ -11,24 +11,24 @@ return [
 
     'template_slugs'    => [
         'ACTIVATION_EMAIL', 'TRAINING_CONFIRMATION_EMAIL',
-        'TRAINING_REMINDER_EMAIL', 'TRAINING_CERTIFICATION_CONFIRMATION_EMAIL'
+        'TRAINING_REMINDER_EMAIL', 'TRAINING_CERTIFICATION_CONFIRMATION_EMAIL',
     ],
 
-    /**
+    /*
      * Available tokens for each template slugs
      */
     'template_tokens' => [
-        'ACTIVATION_EMAIL'  =>  [
-            'USER_NAME', 'EMAIL_ADDRESS'
+        'ACTIVATION_EMAIL'  => [
+            'USER_NAME', 'EMAIL_ADDRESS',
         ],
-        'TRAINING_CONFIRMATION_EMAIL'  =>  [
-            'USER_NAME', 'EMAIL_ADDRESS'
+        'TRAINING_CONFIRMATION_EMAIL'  => [
+            'USER_NAME', 'EMAIL_ADDRESS',
         ],
-        'TRAINING_REMINDER_EMAIL'  =>  [
-            'USER_NAME', 'EMAIL_ADDRESS'
+        'TRAINING_REMINDER_EMAIL'  => [
+            'USER_NAME', 'EMAIL_ADDRESS',
         ],
-        'TRAINING_CERTIFICATION_CONFIRMATION_EMAIL'  =>  [
-            'USER_NAME', 'EMAIL_ADDRESS'
+        'TRAINING_CERTIFICATION_CONFIRMATION_EMAIL'  => [
+            'USER_NAME', 'EMAIL_ADDRESS',
         ],
     ],
 

@@ -45,7 +45,7 @@ class EmailTemplatesController extends BaseController
 
     public function create()
     {
-        if (! $this->canAddTemplates()) {
+        if (!$this->canAddTemplates()) {
             return redirect()->route('email-templates.index')->with('error', __('No more templates can be created.'));
         }
 
@@ -128,6 +128,7 @@ class EmailTemplatesController extends BaseController
     public function templates($slug)
     {
         $templateName = 'template_'.$slug;
+
         return view('proshore-email-templates::templates.'.$templateName, compact('emailTemplates', 'displayAdd'));
     }
 }
