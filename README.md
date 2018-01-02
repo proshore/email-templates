@@ -2,7 +2,8 @@
 [![Latest Stable Version](https://poser.pugx.org/proshore/email-templates/v/stable)](https://packagist.org/packages/proshore/email-templates)
 [![Total Downloads](https://poser.pugx.org/proshore/email-templates/downloads)](https://packagist.org/packages/proshore/email-templates)
 [![Latest Unstable Version](https://poser.pugx.org/proshore/email-templates/v/unstable)](https://packagist.org/packages/proshore/email-templates)
-[![License](https://poser.pugx.org/proshore/email-templates/license)](https://packagist.org/packages/proshore/email-templates)[![StyleCI](https://styleci.io/repos/113530969/shield?branch=master)](https://styleci.io/repos/113530969)
+[![License](https://poser.pugx.org/proshore/email-templates/license)](https://packagist.org/packages/proshore/email-templates)
+[![StyleCI](https://styleci.io/repos/113530969/shield?branch=master)](https://styleci.io/repos/113530969)
 
 Email Template Management with Bootstrap & TinyMCE Editor
 
