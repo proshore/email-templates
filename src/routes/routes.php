@@ -18,5 +18,4 @@ Route::group($routeGroupParams, function () {
     ]]);
 
     Route::get('email-templates/templates/{slug}', 'EmailTemplatesController@templates');
-
 });
